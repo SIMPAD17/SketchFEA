@@ -103,7 +103,7 @@
   <section class="section action band" id="action" aria-labelledby="action-title">
     <div class="wrap">
       <h2 id="action-title" class="section-title reveal">See it in <span class="pencil mid">action</span></h2>
-      <p class="section-intro reveal">A short video of the app on iPhone, without sound, with controls to play and pause it.</p>
+      <p class="section-intro reveal">Short videos of the app on iPhone and iPad, without sound, each with controls to play and pause it.</p>
       <div class="previews reveal-group">
         <figure class="preview phone">
           <div class="preview-frame">
@@ -115,12 +115,22 @@
           <button class="preview-toggle" type="button" aria-controls="video-iphone" hidden>Pause video</button>
           <figcaption>iPhone</figcaption>
         </figure>
+        <figure class="preview tablet">
+          <div class="preview-frame">
+            <img class="preview-poster" src="media/preview-ipad-poster-640.webp" srcset="media/preview-ipad-poster-640.webp 640w, media/preview-ipad-poster-1280.webp 1280w" sizes="(min-width: 1120px) 810px, (min-width: 600px) calc((100vw - 56px) * .76), calc(100vw - 32px)" width="640" height="360" loading="lazy" decoding="async" alt="The iPad video: the headline “Draw a part, see the stress” above an iPad showing the wall bracket, colored by von Mises stress, with a fourth hole just drawn near the wall, beside the Parts panel.">
+            <video class="preview-video" width="1280" height="720" poster="assets/video-poster-clear.png" controls preload="none" muted playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate" aria-label="Video of the app on iPad" aria-describedby="preview-scenes">
+              <source media="(min-width: 600px)" src="media/preview-ipad.mp4" type="video/mp4">
+              <source src="media/preview-ipad-small.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>iPad</figcaption>
+        </figure>
       </div>
       <div class="scenes-block reveal">
-        <h3>In the video</h3>
+        <h3>In the videos</h3>
         <ol class="scenes" id="preview-scenes" role="list">
           <li>A hole is drawn in a wall bracket, and the stress around it changes at once.</li>
-          <li>A photo of a sketch drawn on paper is read, shown sped up, and its parts are checked on the review screen.</li>
+          <li>A photo of a sketch drawn on paper is read, shown sped up, and its parts are checked on the review screen. On iPad it then opens as a sketch, colored by its stress.</li>
           <li>In the Dog bone tensile test example, an aluminum specimen is pulled until it tears.</li>
           <li>In the Tuning fork example, the tines sway in their first mode of vibration.</li>
           <li>The list of the 29 examples, which run without a subscription. Your own photos and most parts need Sketch FEA Pro.</li>
