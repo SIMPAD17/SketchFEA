@@ -1,0 +1,1791 @@
+/* Sketch FEA website. Colors, radii, fonts and shadows are the app's design tokens; tints are color-mix() of tokens.
+   Dark is the default, as in the app; light follows prefers-color-scheme. */
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/IBMPlexSans-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/IBMPlexSans-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/IBMPlexSans-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/IBMPlexMono-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/IBMPlexMono-Medium.woff2') format('woff2');
+}
+
+:root {
+  --bg: #141413;
+  --panel: #1c1c1b;
+  --panel2: #232321;
+  --fg: #e8e6e1;
+  --muted: #9b9890;
+  --line: #35332e;
+  --line2: #2a2926;
+  --accent: #f0b323;
+  --accent2: #ffc94a;
+  --accent-fg: #141413;
+  --canvas: #1a1a19;
+  --shadow: 0 6px 24px rgba(0, 0, 0, .5);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, .45);
+  --label: var(--accent); /* small headings: amber on dark, ink on light (amber on light is under 4.5:1) */
+  --font: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius: 6px;
+  /* Motion: the app's ease-out cubic, 1 - (1 - k)^3, and its 240 ms */
+  --ease-out: cubic-bezier(.33, 1, .68, 1);
+  --t-fast: .15s;
+  --t: .24s;
+  --t-reveal: .48s;
+  /* Light on surfaces: the glow behind the hero animation and the app icon, the wash at the top of a band, and the
+     light at the top of the cards */
+  --glow: color-mix(in srgb, var(--accent) 17%, transparent);
+  --glow-band: color-mix(in srgb, var(--accent) 7%, transparent);
+  --tint-card: color-mix(in srgb, var(--fg) 5%, transparent);
+  --tint-pro: color-mix(in srgb, var(--accent) 15%, transparent);
+  --tint-tile: color-mix(in srgb, var(--accent) 9%, transparent);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f3f2ee;
+    --panel: #ffffff;
+    --panel2: #f7f6f2;
+    --fg: #1f1e1b;
+    --muted: #6f6c66;
+    --line: #dad7cf;
+    --line2: #ebe9e3;
+    --accent: #d19500;
+    --accent2: #a87700;
+    --accent-fg: #1f1e1b;
+    --canvas: #e9e7e1;
+    --shadow: 0 6px 24px rgba(30, 28, 20, .12);
+    --shadow-sm: 0 2px 8px rgba(30, 28, 20, .10);
+    --label: var(--fg);
+    --glow: color-mix(in srgb, var(--accent) 10%, transparent);
+    --glow-band: transparent;
+    --tint-card: transparent;
+    --tint-pro: color-mix(in srgb, var(--accent) 11%, transparent);
+    --tint-tile: color-mix(in srgb, var(--accent) 8%, transparent);
+    color-scheme: light;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 0;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h2,
+h3,
+[id] {
+  scroll-margin-top: 16px;
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 14px;
+}
+
+ul,
+ol {
+  padding-left: 22px;
+}
+
+li {
+  margin: 0 0 6px;
+}
+
+a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color var(--t-fast) ease, text-decoration-color var(--t-fast) ease;
+}
+
+a:hover {
+  text-decoration-color: var(--fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+code,
+.mono {
+  font-family: var(--mono);
+  font-size: .94em;
+}
+
+/* Skip link: off screen until it has focus */
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -200px;
+  z-index: 90;
+  padding: 10px 16px;
+  background: var(--panel);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+}
+
+.skip:focus {
+  top: 12px;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Header */
+.site-head {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.site-head .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 60px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+  color: var(--fg);
+  min-height: 44px;
+}
+
+.brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+}
+
+.site-nav ul {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav li {
+  margin: 0;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover {
+  color: var(--fg);
+}
+
+.site-nav a[aria-current='page'] {
+  color: var(--fg);
+  border-bottom-color: var(--accent);
+}
+
+/* Main */
+main {
+  display: block;
+  padding: 32px 0 56px;
+}
+
+.home main {
+  padding: 0;
+}
+
+.prose {
+  max-width: 720px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.page-title {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.updated {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.lead {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 14px;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 14px;
+}
+
+.actions.center {
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel2);
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.btn:hover {
+  border-color: var(--muted);
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+.btn.primary:hover {
+  box-shadow: var(--shadow-sm);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-fg);
+}
+
+/* Home page: hero */
+.hero {
+  padding: 36px 0 8px;
+}
+
+.hero-grid {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 46px;
+  letter-spacing: -.02em;
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+
+.hero-line {
+  text-wrap: balance;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+.hero-sub {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 34em;
+}
+
+.hero-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--canvas);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.hero-media picture,
+.hero-poster,
+.hero-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The browser picks the video once, when the page loads. If the box changes shape later (a phone turned from portrait
+   to landscape), the crop stays centered, so the crack across the middle of the plate stays in view. */
+.hero-poster,
+.hero-video {
+  object-position: 50% 50%;
+}
+
+/* Safari does not autoplay in Low Power Mode and would draw its start button over the video; the still image under the
+   video shows instead. */
+.hero-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+.hero-video::-webkit-media-controls {
+  display: none !important;
+}
+
+/* "Pause animation": a real checkbox, visually replaced by the label's box. Checked, the video is hidden and the
+   still image under it shows (WCAG 2.2.2). */
+.still {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.still-label {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 36px;
+  padding: 6px 14px 6px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.still-label::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--muted);
+  border-radius: 4px;
+  transition: background-color var(--t-fast) ease, border-color var(--t-fast) ease;
+}
+
+.still-label::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  width: 5px;
+  height: 9px;
+  margin-top: -6px;
+  border: solid var(--accent-fg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.still:checked ~ .still-label::before {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.still:checked ~ .still-label::after {
+  opacity: 1;
+}
+
+.still:focus-visible ~ .still-label {
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+.still-label:hover {
+  border-color: var(--muted);
+}
+
+.still:checked ~ .loop-video {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loop-video,
+  .still,
+  .still-label {
+    display: none;
+  }
+}
+
+/* Text for screen readers only */
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Home page: the names of the 29 built-in examples in a row under the hero. It repeats the list in "Learn with 29
+   examples", so it is hidden from screen readers. Where scroll timelines exist and motion is allowed, it moves to the
+   right while the page scrolls, and stops when the page stops; otherwise it is
+   still, with a faded right edge. overflow: clip (not hidden) keeps the band from becoming a scroll container, so its
+   view() timeline follows the page. */
+.example-band {
+  margin-top: 40px;
+  border-top: 1px solid var(--line2);
+  border-bottom: 1px solid var(--line2);
+  overflow: hidden;
+  overflow: clip;
+  -webkit-mask-image: linear-gradient(90deg, var(--fg) calc(100% - 64px), transparent);
+  mask-image: linear-gradient(90deg, var(--fg) calc(100% - 64px), transparent);
+}
+
+.band-track {
+  display: flex;
+  width: max-content;
+  padding-left: max(16px, calc((100vw - 1088px) / 2));
+}
+
+.band-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.band-list li {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 13px 0;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.band-list li::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  margin: 0 20px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+@keyframes band-drift {
+  from {
+    translate: -720px 0;
+  }
+
+  to {
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .example-band {
+      -webkit-mask-image: linear-gradient(90deg, transparent, var(--fg) 48px, var(--fg) calc(100% - 48px), transparent);
+      mask-image: linear-gradient(90deg, transparent, var(--fg) 48px, var(--fg) calc(100% - 48px), transparent);
+    }
+
+    .band-track {
+      padding-left: 0;
+      animation: band-drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+/* Home page: sections */
+.section {
+  padding: 64px 0 0;
+}
+
+.section-title,
+.cta h2 {
+  font-size: clamp(30px, 2.2vw + 20px, 44px);
+  letter-spacing: -.02em;
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+.feature-text h2 {
+  font-size: 30px;
+  letter-spacing: -.02em;
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+.section-intro {
+  max-width: 720px;
+}
+
+/* The colored-pencil underline of the App Store headlines, under one key word of a heading: amber, and blue under
+   "stress" in the hero, as in the first App Store image. It is a background image, so the text and its contrast do not
+   change; links keep their straight underline. Where motion is allowed it is drawn in from the left once its heading
+   has appeared (see Motion). */
+.pencil {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+/* behind the letters of its word, as in the App Store headlines, so the descenders stay whole */
+.pencil::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -.12em;
+  right: -.14em;
+  bottom: -.1em;
+  height: .41em;
+  background: center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.pencil.short::after {
+  background-image: url('pencil-amber-short-dark.webp');
+}
+
+.pencil.mid::after {
+  background-image: url('pencil-amber-mid-dark.webp');
+}
+
+.pencil.long::after {
+  background-image: url('pencil-amber-long-dark.webp');
+}
+
+.pencil.blue::after {
+  background-image: url('pencil-blue-mid-dark.webp');
+}
+
+@media (prefers-color-scheme: light) {
+  .pencil.short::after {
+    background-image: url('pencil-amber-short-light.webp');
+  }
+
+  .pencil.mid::after {
+    background-image: url('pencil-amber-mid-light.webp');
+  }
+
+  .pencil.long::after {
+    background-image: url('pencil-amber-long-light.webp');
+  }
+
+  .pencil.blue::after {
+    background-image: url('pencil-blue-mid-light.webp');
+  }
+}
+
+/* Screenshots: the ten App Store images, a strip that scrolls sideways below 1000 px and two rows of five above. The
+   column width always leaves part of the next image in view, so the strip shows that it scrolls. The side gutters are
+   the list's padding, so they stay at the ends of the scrolled strip; the top and bottom padding leave room for the
+   shadows, which the strip would otherwise cut off. The gaps are narrow, so the pencil lines read from one image into
+   the next, as on the App Store. */
+.shot-strip {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 16px;
+  padding: 26px 0 30px;
+  margin-top: -8px;
+}
+
+.shot-strip:focus-visible {
+  outline-offset: -2px;
+}
+
+.shot-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(calc((100vw - 32px) / 1.55), 260px);
+  gap: 12px;
+  width: max-content;
+  list-style: none;
+  margin: 0;
+  padding: 0 16px;
+}
+
+@media (min-width: 480px) {
+  .shot-list {
+    grid-auto-columns: calc((100vw - 48px) / 2.4);
+  }
+}
+
+@media (min-width: 720px) {
+  .shot-list {
+    grid-auto-columns: calc((100vw - 64px) / 3.4);
+  }
+}
+
+.shot-list li {
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.shot-list img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  box-shadow: var(--shadow);
+}
+
+/* See it in action: the two framed videos, side by side from 600 px with the same height (the columns are in the
+   ratio of the videos' widths at equal height: 9 / 16 to 16 / 9), stacked on phones. Each video has the browser's
+   own controls. The iPhone video plays muted, in a loop, while it is on screen (the script; it loads nothing before
+   the page has loaded and the video comes near the screen), with a Pause video button beside its caption; the iPad
+   video loads nothing until play is pressed. The poster attribute is a transparent 1 x 1 image, so the lazy,
+   responsive still image under the video shows through (without a poster, Chrome paints a gray box). The frame has a
+   band under the picture for the browser's controls, so they do not cover the picture; the band is the videos' own dark
+   canvas in both themes, as the controls are drawn for a dark background. */
+.previews {
+  display: grid;
+  gap: 32px;
+  justify-items: center;
+  margin-top: 28px;
+}
+
+.preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  width: 100%;
+}
+
+.preview.phone {
+  max-width: 260px;
+}
+
+.preview-frame {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: #141413; /* the framed videos' own background (the dark --bg), so the controls band matches the picture */
+  box-shadow: var(--shadow);
+}
+
+.preview-poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.preview-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 0;
+}
+
+.preview-video:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: -3px;
+}
+
+.preview figcaption {
+  grid-row: 2;
+  grid-column: 1;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Pause video: a real button under the frame, never over the picture or the device, in the look of the hero's
+   "Pause animation". The script shows it and keeps its text in step with the video (WCAG 2.2.2: the browser hides its
+   own controls a few seconds into playback). It draws a pause sign, or a play triangle while the video is paused. On
+   narrow screens it sits beside the caption; from 600 px, where the iPhone figure is narrow, on its own row under it. */
+.preview-toggle {
+  grid-row: 2;
+  grid-column: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 36px;
+  margin-top: 14px;
+  padding: 6px 14px 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel2);
+  color: var(--fg);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.preview-toggle[hidden] {
+  display: none;
+}
+
+.preview-toggle:hover {
+  border-color: var(--muted);
+}
+
+.preview-toggle::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 12px;
+  border-inline: 3px solid currentColor;
+}
+
+.preview-toggle.is-paused::before {
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.scenes-block {
+  margin-top: 40px;
+  max-width: 1088px;
+}
+
+.scenes-block h3 {
+  margin-bottom: 14px;
+  color: var(--label);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.scenes {
+  display: grid;
+  gap: 12px 28px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: scene;
+}
+
+.scenes li {
+  position: relative;
+  counter-increment: scene;
+  margin: 0;
+  padding: 0 0 0 36px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.scenes li::before {
+  content: counter(scene);
+  position: absolute;
+  left: 0;
+  top: -1px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Feature rows: text and a screenshot, side by side on wide screens, with a hairline between rows (See it in action is
+   a band, whose edge does that above the first row) */
+.feature {
+  padding: 64px 0 0;
+}
+
+.feature + .feature::before {
+  content: '';
+  display: block;
+  width: calc(100% - 32px);
+  max-width: 1088px;
+  height: 1px;
+  margin: 0 auto 64px;
+  background: var(--line2);
+}
+
+.action + .feature {
+  padding-top: 64px;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+
+.feature-text {
+  font-size: 17px;
+}
+
+.feature-text > :last-child {
+  margin-bottom: 0;
+}
+
+.feature-shot img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  box-shadow: var(--shadow);
+}
+
+.ticks {
+  padding-left: 20px;
+}
+
+.ticks li {
+  margin-bottom: 8px;
+}
+
+.ticks li::marker {
+  color: var(--accent);
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  counter-increment: step;
+  min-height: 32px;
+  margin: 0 0 14px;
+  padding: 3px 0 0 46px;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--panel));
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 18px 0;
+}
+
+.fields li {
+  margin: 0;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  font-size: 15px;
+}
+
+.fields .u {
+  margin-left: 4px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px 28px;
+  margin-top: 22px;
+}
+
+.groups h3 {
+  margin-bottom: 6px;
+  color: var(--label);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.groups ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+}
+
+.groups li {
+  margin: 0;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line2);
+}
+
+.groups li:last-child {
+  border-bottom: 0;
+}
+
+/* Feature rows without a screenshot (until the App Store images exist): a card beside the text, lit from the top like
+   the plan cards, with the roles, analyses, examples or theory values of the row */
+.feature-aside {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+.feature-aside::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(100% 70% at 50% 0, var(--tint-card), transparent 70%);
+}
+
+.feature-aside > :last-child {
+  margin-bottom: 0;
+}
+
+.feature-aside .groups {
+  margin-top: 0;
+}
+
+.aside-title {
+  margin-bottom: 8px;
+  color: var(--label);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.aside-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+}
+
+.aside-list li {
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line2);
+  color: var(--muted);
+}
+
+.aside-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.aside-list strong {
+  display: block;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* Bands: See it in action, Free and Pro, and the end of the page, on the panel color between sections on the page
+   color. A lit band has a soft light from above (dark theme only), and the closing band a glow behind the app icon. */
+.band {
+  position: relative;
+  isolation: isolate;
+  margin-top: 72px;
+  padding: 64px 0;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.band.lit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(55% 160px at 50% 0, var(--glow-band), transparent 75%);
+}
+
+.cta.lit::before {
+  background: radial-gradient(40% 260px at 50% 30%, var(--glow), transparent 72%);
+}
+
+/* Free and Pro: cards lit from the top, Pro in amber */
+.plans {
+  display: grid;
+  gap: 16px;
+  margin: 22px 0 20px;
+}
+
+.plan {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+
+.plan::before,
+.tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(100% 70% at 50% 0, var(--tint-card), transparent 70%);
+}
+
+.plan.pro {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.plan.pro::before {
+  background: radial-gradient(100% 75% at 50% 0, var(--tint-pro), transparent 72%);
+}
+
+.plan h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.plan > :last-child {
+  margin-bottom: 0;
+}
+
+/* On your device: the image and the four tiles, side by side on wide screens */
+.device-grid {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* On your device without its image: the four tiles in a row on wide screens */
+.tiles.wide {
+  margin-top: 28px;
+}
+
+/* Each tile is lit from its icon, at the top left */
+.tile {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  column-gap: 16px;
+  align-items: start;
+  align-content: start;
+  margin: 0;
+  padding: 16px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.tile::before {
+  background: radial-gradient(60% 120% at 0 0, var(--tint-tile), transparent 72%);
+}
+
+.tile svg {
+  grid-row: 1 / span 2;
+  display: block;
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tile h3 {
+  font-size: 17px;
+  margin: 1px 0 2px;
+}
+
+.tile p {
+  grid-column: 2;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.device-shot img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  box-shadow: var(--shadow);
+}
+
+.note {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  max-width: 860px;
+}
+
+.note > :last-child {
+  margin-bottom: 0;
+}
+
+/* Call to action */
+.cta {
+  text-align: center;
+}
+
+.cta .app-icon {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 20px;
+  border-radius: 21px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.cta h2 {
+  margin-bottom: 8px;
+}
+
+.cta .actions {
+  margin-top: 22px;
+}
+
+/* Legal and support pages */
+.prose h2 {
+  font-size: 22px;
+  margin: 40px 0 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line2);
+}
+
+.prose h3 {
+  font-size: 18px;
+  margin: 28px 0 8px;
+}
+
+.prose .first {
+  margin-top: 28px;
+}
+
+.toc {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 20px 6px;
+  margin: 8px 0 8px;
+}
+
+.toc h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+  padding: 0;
+  border: 0;
+}
+
+.toc ol,
+.toc ul {
+  margin: 0 0 10px;
+  padding-left: 0;
+  list-style: none;
+  columns: 1;
+}
+
+.toc li {
+  margin: 0 0 4px;
+  break-inside: avoid;
+}
+
+.toc a {
+  display: inline-block;
+  padding: 2px 0;
+  text-decoration-thickness: 1px;
+}
+
+.summary {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 20px 4px;
+  margin: 0 0 20px;
+}
+
+.caps {
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: .01em;
+}
+
+.address {
+  font-style: normal;
+  line-height: 1.8;
+  margin: 0 0 14px;
+}
+
+.contact-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 0 0 16px;
+}
+
+.contact-box .email {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.contact-box > :last-child {
+  margin-bottom: 0;
+}
+
+.faq h3 {
+  margin-top: 26px;
+}
+
+/* Footer */
+.site-foot {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  padding: 28px 0 36px;
+}
+
+.home .site-foot {
+  border-top: 0;
+}
+
+.site-foot a {
+  color: var(--muted);
+  text-decoration-color: var(--line);
+}
+
+.site-foot a:hover {
+  color: var(--fg);
+  text-decoration-color: var(--accent);
+}
+
+.foot-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin-bottom: 14px;
+}
+
+.foot-brand {
+  color: var(--fg);
+}
+
+.site-foot .foot-brand {
+  margin: 0;
+}
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.foot-links li {
+  margin: 0;
+}
+
+.foot-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+.site-foot p {
+  margin: 0 0 6px;
+}
+
+/* Phones: keep the brand and the four links on one line; the brand shows its icon only, and its name stays for screen
+   readers (each page's title names Sketch FEA just below) */
+@media (max-width: 479px) {
+  .site-head .wrap {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+
+  .brand {
+    font-size: 16px;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .brand span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    margin-right: -7px;
+  }
+
+  .site-nav ul {
+    gap: 0;
+  }
+
+  .site-nav a {
+    padding: 0 7px;
+  }
+
+  .hero .actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* The narrowest phones (320 px) */
+@media (max-width: 359px) {
+  .site-nav a {
+    padding: 0 5px;
+    font-size: 14px;
+  }
+}
+
+/* Wider screens */
+@media (min-width: 560px) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 600px) {
+  .hero-media {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* The two figures share the rows of the grid (frame, caption, Pause video), so the captions sit on one line even
+     where the frames' borders make their heights differ by a few pixels. The iPhone figure is too narrow here for the
+     caption and the button side by side, so the button has the third row, under its caption; without the script the
+     row is empty. */
+  .previews {
+    grid-template-columns: minmax(0, 316fr) minmax(0, 1000fr);
+    align-items: start;
+    gap: 0 24px;
+  }
+
+  .preview {
+    grid-row: span 3;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: subgrid;
+  }
+
+  .preview-toggle {
+    grid-row: 3;
+    grid-column: 1;
+    justify-self: start;
+    margin-top: 8px;
+  }
+
+  .preview-frame {
+    align-self: stretch; /* both frames end on the same line; the borders cost the tall frame more height */
+  }
+
+  .preview.phone {
+    max-width: none;
+  }
+
+  .plans {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 720px) {
+  .toc ol {
+    columns: 2;
+    column-gap: 32px;
+  }
+
+  .page-title {
+    font-size: 40px;
+  }
+
+  .feature-text h2 {
+    font-size: clamp(34px, 1vw + 24px, 38px);
+  }
+}
+
+@media (min-width: 960px) {
+  main {
+    padding-top: 48px;
+  }
+
+  /* The hero clips the glow below at the window's right edge; the space under the hero is its padding rather than the
+     band's margin, so the glow fits inside it */
+  .hero {
+    padding: 64px 0 72px;
+    overflow: hidden;
+    overflow: clip;
+  }
+
+  /* A glow around the launch animation. Its box is the animation's box (the second column, 4 : 3, centered in the
+     row; the padding keeps the content box at that size) grown by the padding, most to the right; the glow is even up
+     to the animation's edge and fades out within the padding, before the text column, the header and the band of
+     examples. */
+  .hero-grid {
+    position: relative;
+    isolation: isolate;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 56px;
+  }
+
+  .hero-grid::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: calc((100% - 88px) * 5 / 11 + 72px);
+    right: 16px;
+    box-sizing: content-box;
+    aspect-ratio: 4 / 3;
+    padding: 64px 128px 64px 32px;
+    margin: 0 -128px 0 -32px;
+    translate: 0 -50%;
+    pointer-events: none;
+    background: radial-gradient(closest-side, var(--glow) 66%, transparent);
+  }
+
+  .hero h1 {
+    font-size: clamp(64px, 2.5vw + 40px, 72px);
+    letter-spacing: -.025em;
+  }
+
+  .hero-line {
+    font-size: clamp(26px, 1.25vw + 14px, 30px);
+  }
+
+  .example-band {
+    margin-top: 8px;
+  }
+
+  .section {
+    padding-top: 88px;
+  }
+
+  .feature {
+    padding-top: 88px;
+  }
+
+  .feature + .feature::before {
+    margin-bottom: 88px;
+  }
+
+  .action + .feature {
+    padding-top: 88px;
+  }
+
+  .feature-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 64px;
+  }
+
+  .feature.flip .feature-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .feature.flip .feature-text {
+    order: 2;
+  }
+
+  .band {
+    margin-top: 96px;
+    padding: 88px 0;
+  }
+
+  .device-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 48px;
+  }
+
+  .device-grid .tiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tiles.wide {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .scenes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+@media (min-width: 1000px) {
+  .shot-list {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 28px 14px;
+    width: auto;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+}
+
+/* Motion, only on screens and only when the visitor allows it. Reveal on scroll: the script marks parts that are below
+   the fold when it runs as pending and reveals each one, once, as it comes into view (the parts of a group one after
+   another, in steps of five for the two rows of App Store images); only opacity and position change, never the
+   framed images themselves. Pencil underlines in a part are drawn in after it appears; the one in the hero once, at
+   load. The App Store buttons rise 1 px on hover. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .reveal.reveal-pending,
+  .reveal-group.reveal-pending > * {
+    opacity: 0;
+    translate: 0 16px;
+  }
+
+  .reveal.reveal-in,
+  .reveal-group.reveal-in > * {
+    transition: opacity var(--t-reveal) var(--ease-out), translate var(--t-reveal) var(--ease-out);
+  }
+
+  .feature-shot.reveal-in,
+  .feature-aside.reveal-in,
+  .device-shot.reveal-in {
+    transition-delay: 80ms;
+  }
+
+  .reveal-group.reveal-in > :nth-child(5n+2) {
+    transition-delay: 60ms;
+  }
+
+  .reveal-group.reveal-in > :nth-child(5n+3) {
+    transition-delay: 120ms;
+  }
+
+  .reveal-group.reveal-in > :nth-child(5n+4) {
+    transition-delay: 180ms;
+  }
+
+  .reveal-group.reveal-in > :nth-child(5n+5) {
+    transition-delay: 240ms;
+  }
+
+  .pencil::after {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .reveal-pending .pencil::after {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .reveal-in .pencil::after {
+    transition: clip-path .6s var(--ease-out) .24s;
+  }
+
+  .hero-line .pencil::after {
+    animation: pencil-draw .6s var(--ease-out) .3s backwards;
+  }
+
+  .btn,
+  .still-label,
+  .preview-toggle {
+    transition: border-color var(--t-fast) ease, background-color var(--t-fast) ease, box-shadow var(--t) var(--ease-out), translate var(--t) var(--ease-out);
+  }
+
+  .btn.primary:hover {
+    translate: 0 -1px;
+  }
+
+  .btn:active,
+  .btn.primary:active {
+    translate: 0 0;
+    transition-duration: 0s;
+  }
+}
+
+@keyframes pencil-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media print {
+  .skip,
+  .site-nav,
+  .actions,
+  .still-label,
+  .loop-video,
+  .preview-video,
+  .preview-toggle,
+  .example-band {
+    display: none;
+  }
+
+  .site-foot {
+    border-top: 0;
+  }
+}

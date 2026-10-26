@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; media-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)">
+<title>Sketch FEA: draw a part, see the stress</title>
+<meta name="description" content="Sketch FEA is an educational app for iPhone and iPad for learning finite element analysis (FEA) from simple sketches. Draw a part, hold it and load it, and see stress, displacement, heat, vibration, buckling, and breakage.">
+<link rel="canonical" href="https://sketchfea.journeyon.co/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sketchfea.journeyon.co/">
+<meta property="og:title" content="Sketch FEA">
+<meta property="og:description" content="Draw a part, see the stress. An educational app for iPhone and iPad.">
+<meta property="og:image" content="https://sketchfea.journeyon.co/media/hero-landscape.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="768">
+<meta property="og:image:alt" content="A notched glass plate pulled apart until it broke, drawn in colored pencil, from the launch animation of the Sketch FEA app.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+</head>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./" aria-current="page"><img src="assets/favicon-32.png" srcset="assets/favicon-32.png 1x, assets/brand-96.png 3x" width="30" height="30" alt=""><span>Sketch FEA</span></a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="pricing/">Pricing</a></li>
+        <li><a href="support/">Support</a></li>
+        <li><a href="privacy/">Privacy</a></li>
+        <li><a href="terms/">Terms</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">For iPhone and iPad</p>
+        <h1 id="hero-title">Sketch FEA</h1>
+        <p class="hero-line">Draw a part, see the <span class="pencil blue">stress</span>.</p>
+        <p class="hero-sub">An educational app for learning finite element analysis (FEA). Draw a part, hold it, load it or heat it, pick a material, and see the displacement, stress, and temperature as you draw.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://apps.apple.com/us/developer/journey-on/id1807155063">Coming soon to the App Store</a>
+          <a class="btn" href="#draw">See the features</a>
+        </div>
+        <p class="small muted">Requires iOS or iPadOS 16.4 or later. In English.</p>
+      </div>
+      <div class="hero-media">
+        <input class="still" type="checkbox" id="still">
+        <picture>
+          <source media="(min-width: 600px)" type="image/webp" srcset="media/hero-landscape.webp">
+          <source media="(min-width: 600px)" srcset="media/hero-landscape.jpg">
+          <source type="image/webp" srcset="media/hero-portrait.webp">
+          <img class="hero-poster" src="media/hero-portrait.jpg" width="720" height="900" alt="A glass plate with a notch in each side, from the app’s launch animation, drawn like colored pencil: pulled apart, it has broken across the notches, and its two halves ring after the break, colored by stress, blue where it is low and amber where it is high, computed with the app’s own solver.">
+        </picture>
+        <video class="loop-video hero-video" width="1024" height="768" autoplay loop muted playsinline disablepictureinpicture disableremoteplayback aria-hidden="true">
+          <source media="(prefers-reduced-motion: no-preference) and (min-width: 600px)" src="media/hero-landscape.mp4" type="video/mp4">
+          <source media="(prefers-reduced-motion: no-preference)" src="media/hero-portrait.mp4" type="video/mp4">
+        </video>
+        <label class="still-label" for="still">Pause animation</label>
+      </div>
+    </div>
+  </section>
+
+  <div class="example-band" aria-hidden="true">
+    <div class="band-track">
+      <ul class="band-list"><li>Cantilever beam</li><li>Plate with a hole</li><li>Thick-walled cylinder</li><li>Rotating disk</li><li>Curved beam</li><li>Heat through a wall</li><li>Cooling fin</li><li>Sudden heating of a block</li><li>Clamped bar heated</li><li>Bimetal strip</li><li>Vibrating cantilever</li><li>Shaken cantilever</li><li>Sudden load on a bar</li><li>Column buckling</li><li>Bar past yield</li><li>Dog bone tensile test</li><li>L-bracket</li><li>Crane hook</li><li>Wrench</li><li>Pressure vessel head</li><li>Heat sink</li><li>Brake disk</li><li>Hot pipe under pressure</li><li>Thermostat strip with a heater</li><li>Tuning fork</li><li>Bracket on a shaker</li><li>Dropped load on a beam</li><li>Strut with a hole</li><li>Notched glass bar</li></ul>
+      <ul class="band-list"><li>Cantilever beam</li><li>Plate with a hole</li><li>Thick-walled cylinder</li><li>Rotating disk</li><li>Curved beam</li><li>Heat through a wall</li><li>Cooling fin</li><li>Sudden heating of a block</li><li>Clamped bar heated</li><li>Bimetal strip</li><li>Vibrating cantilever</li><li>Shaken cantilever</li><li>Sudden load on a bar</li><li>Column buckling</li><li>Bar past yield</li><li>Dog bone tensile test</li><li>L-bracket</li><li>Crane hook</li><li>Wrench</li><li>Pressure vessel head</li><li>Heat sink</li><li>Brake disk</li><li>Hot pipe under pressure</li><li>Thermostat strip with a heater</li><li>Tuning fork</li><li>Bracket on a shaker</li><li>Dropped load on a beam</li><li>Strut with a hole</li><li>Notched glass bar</li></ul>
+    </div>
+  </div>
+
+  <section class="section shots" id="app" aria-labelledby="shots-title">
+    <div class="wrap">
+      <h2 id="shots-title" class="section-title reveal">In the <span class="pencil short">app</span></h2>
+    </div>
+    <div class="shot-strip" role="region" aria-label="Screenshots" tabindex="0">
+      <ul class="shot-list reveal-group">
+        <li><img src="media/iphone-01-draw-280.webp" srcset="media/iphone-01-draw-280.webp 280w, media/iphone-01-draw-560.webp 560w, media/iphone-01-draw-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Draw a part, see the stress. Stress and displacement show up as you draw."></li>
+        <li><img src="media/iphone-02-crack-280.webp" srcset="media/iphone-02-crack-280.webp 280w, media/iphone-02-crack-560.webp 560w, media/iphone-02-crack-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Watch a crack run through it. Brittle and ductile parts, pulled until they break. Built-in example."></li>
+        <li><img src="media/iphone-03-heat-280.webp" srcset="media/iphone-03-heat-280.webp 280w, media/iphone-03-heat-560.webp 560w, media/iphone-03-heat-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Heat and thermal stress. Temperatures, heat flow, and the stress they cause. Built-in example."></li>
+        <li><img src="media/iphone-04-vibrate-280.webp" srcset="media/iphone-04-vibrate-280.webp 280w, media/iphone-04-vibrate-560.webp 560w, media/iphone-04-vibrate-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="See how it vibrates. Natural frequencies and mode shapes, in Hz. Built-in example."></li>
+        <li><img src="media/iphone-05-buckle-280.webp" srcset="media/iphone-05-buckle-280.webp 280w, media/iphone-05-buckle-560.webp 560w, media/iphone-05-buckle-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Find the buckling load. How much a slender part carries before it bows out. Built-in example."></li>
+        <li><img src="media/iphone-06-examples-280.webp" srcset="media/iphone-06-examples-280.webp 280w, media/iphone-06-examples-560.webp 560w, media/iphone-06-examples-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Learn from 29 examples. Beams, brackets, hooks, and disks, with notes."></li>
+        <li><img src="media/iphone-07-theory-280.webp" srcset="media/iphone-07-theory-280.webp 280w, media/iphone-07-theory-560.webp 560w, media/iphone-07-theory-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Compare with theory. Examples check their results against textbook answers. Built-in example."></li>
+        <li><img src="media/iphone-08-materials-280.webp" srcset="media/iphone-08-materials-280.webp 280w, media/iphone-08-materials-560.webp 560w, media/iphone-08-materials-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Steel, aluminum, and more. Materials with their properties and their sources. Sketch FEA Pro."></li>
+        <li><img src="media/iphone-09-light-280.webp" srcset="media/iphone-09-light-280.webp 280w, media/iphone-09-light-560.webp 560w, media/iphone-09-light-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Dark or light. Dark by default, light when you want it. Built-in example."></li>
+        <li><img src="media/iphone-10-offline-280.webp" srcset="media/iphone-10-offline-280.webp 280w, media/iphone-10-offline-560.webp 560w, media/iphone-10-offline-840.webp 840w" sizes="(min-width: 1000px) 200px, (min-width: 720px) calc((100vw - 64px) / 3.4), (min-width: 480px) calc((100vw - 48px) / 2.4), min(calc((100vw - 32px) / 1.55), 260px)" width="280" height="609" loading="lazy" decoding="async" alt="Works offline. No account. Your sketches stay on your device."></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="feature" id="draw" aria-labelledby="draw-title">
+    <div class="wrap feature-grid">
+      <div class="feature-text reveal">
+        <h2 id="draw-title"><span class="pencil short">Draw</span> it</h2>
+        <p>Draw lines, rectangles, circles, curves, freehand strokes, and dimensions in mm, with snapping, undo, and redo. Type a dimension to resize a side.</p>
+        <p>Give each part a role: the solid part and its holes, the supports that hold it, the loads that push on it, and the temperatures and heat that reach it. Each solid has its own material.</p>
+        <p>Model a plate of set thickness (plane stress), a slice of a long part (plane strain), or the section of a round part (axisymmetric).</p>
+      </div>
+      <div class="feature-aside reveal">
+        <div class="groups">
+          <div>
+            <h3>The part</h3>
+            <ul>
+              <li>Solid</li>
+              <li>Hole</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Supports</h3>
+            <ul>
+              <li>Fixed</li>
+              <li>Pin</li>
+              <li>Roller</li>
+              <li>Symmetry</li>
+              <li>Displacement</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Loads</h3>
+            <ul>
+              <li>Force</li>
+              <li>Pressure</li>
+              <li>Gravity, acceleration, and rotation</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Heat</h3>
+            <ul>
+              <li>Temperature</li>
+              <li>Heat flux</li>
+              <li>Convection</li>
+              <li>Heat source</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature flip" id="analyze" aria-labelledby="analyze-title">
+    <div class="wrap feature-grid">
+      <div class="feature-text reveal">
+        <h2 id="analyze-title"><span class="pencil mid">Analyze</span> it</h2>
+        <p>The solver works while you draw and edit. A quick result shows at once, and a finer one replaces it when you stop.</p>
+        <ul class="fields" aria-label="Some of the fields you can show">
+          <li>von Mises stress <span class="u">MPa</span></li>
+          <li>Displacement <span class="u">mm</span></li>
+          <li>Temperature <span class="u">°C</span></li>
+          <li>Heat flux <span class="u">W/m²</span></li>
+          <li>Factor of safety</li>
+        </ul>
+        <ul class="ticks">
+          <li>See the deformed shape, mode shapes, and the crack as it grows.</li>
+          <li>Read probes at a point, along a line, or over an area.</li>
+          <li>Read the largest values and where they are, the reactions at the supports, frequencies in Hz, the buckling load, and the peak force.</li>
+          <li>Work in SI units (mm, N, MPa, °C) or US customary units (in, lbf, psi, °F).</li>
+        </ul>
+      </div>
+      <div class="feature-aside reveal">
+        <h3 class="aside-title">Nine analyses</h3>
+        <ul class="aside-list">
+          <li><strong>Static stress</strong> Displacement, stress, strain, and the factor of safety.</li>
+          <li><strong>Heat</strong> Steady temperatures and the heat through each edge.</li>
+          <li><strong>Heat over time</strong> Temperatures as they change from a uniform start.</li>
+          <li><strong>Thermal stress</strong> The stress that a temperature change causes.</li>
+          <li><strong>Vibration modes</strong> Natural frequencies and mode shapes.</li>
+          <li><strong>Shaking</strong> The response to a force that swings at one frequency.</li>
+          <li><strong>Dynamics over time</strong> The motion after a sudden, ramped, or pulsed load.</li>
+          <li><strong>Buckling</strong> The load at which a slender part bows out.</li>
+          <li><strong>Breakage</strong> A rising load until the part yields, cracks, and breaks.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature" id="examples" aria-labelledby="examples-title">
+    <div class="wrap feature-grid">
+      <div class="feature-text reveal">
+        <h2 id="examples-title">Learn with <span class="pencil long">29 examples</span></h2>
+        <p>Each example has notes on what to look for, the theory value where there is one, and what to try next. All 29 are free to run and explore, in every analysis.</p>
+        <p>Pick from 18 materials, from structural steel and aluminum 6061-T6 to ABS, PLA, glass, and concrete, each with its properties and their sources.</p>
+      </div>
+      <div class="feature-aside reveal">
+        <div class="groups">
+          <div>
+            <h3>Checks against theory</h3>
+            <ul>
+              <li>Cantilever beam</li>
+              <li>Plate with a hole</li>
+              <li>Thick-walled cylinder</li>
+              <li>Rotating disk</li>
+              <li>Curved beam</li>
+              <li>Heat through a wall</li>
+              <li>Cooling fin</li>
+              <li>Sudden heating of a block</li>
+              <li>Clamped bar heated</li>
+              <li>Bimetal strip</li>
+              <li>Vibrating cantilever</li>
+              <li>Shaken cantilever</li>
+              <li>Sudden load on a bar</li>
+              <li>Column buckling</li>
+              <li>Bar past yield</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Applications</h3>
+            <ul>
+              <li>Dog bone tensile test</li>
+              <li>L-bracket</li>
+              <li>Crane hook</li>
+              <li>Wrench</li>
+              <li>Pressure vessel head</li>
+              <li>Heat sink</li>
+              <li>Brake disk</li>
+              <li>Hot pipe under pressure</li>
+              <li>Thermostat strip with a heater</li>
+              <li>Tuning fork</li>
+              <li>Bracket on a shaker</li>
+              <li>Dropped load on a beam</li>
+              <li>Strut with a hole</li>
+              <li>Notched glass bar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature flip" id="theory" aria-labelledby="theory-title">
+    <div class="wrap feature-grid">
+      <div class="feature-text reveal">
+        <h2 id="theory-title">Compare with <span class="pencil mid">theory</span></h2>
+        <p>Fifteen examples follow cases with a known answer from mechanics and heat transfer textbooks. When the run is done, the Results tab shows the theory value beside the app’s own value, and whether they agree within the stated tolerance.</p>
+        <p>Change the part and see how far the answer moves: make a beam deeper, a hole larger, or a column taller.</p>
+      </div>
+      <div class="feature-aside reveal">
+        <h3 class="aside-title">Theory values in the notes</h3>
+        <ul class="aside-list">
+          <li><strong>Cantilever beam</strong> Tip deflection 0.2014 mm, from the elasticity solution.</li>
+          <li><strong>Plate with a hole</strong> Stress at the hole 3.15 times the stress far away.</li>
+          <li><strong>Clamped bar heated</strong> Stress −EαΔT = −117 MPa along the bar.</li>
+          <li><strong>Vibrating cantilever</strong> First bending frequency 808.4 Hz.</li>
+          <li><strong>Column buckling</strong> Buckling load 164.45 N: Euler’s load for a fixed–free column, lowered slightly by shear.</li>
+          <li><strong>Bar past yield</strong> Peak force 6,200 N, the tensile strength times the area.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band lit" id="plans" aria-labelledby="plans-title">
+    <div class="wrap">
+      <h2 id="plans-title" class="section-title reveal">Free and Sketch FEA <span class="pencil short">Pro</span></h2>
+      <div class="plans reveal-group">
+        <div class="plan">
+          <h3>Free</h3>
+          <ul class="ticks">
+            <li>Run and explore all 29 examples, in every analysis.</li>
+            <li>Draw your own outline and holes in a bar of structural steel or aluminum 6061-T6, fixed at one end and loaded at the other, in static stress.</li>
+            <li>Coarse and Medium meshes.</li>
+            <li>Projects, files, units, and the help.</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <h3>Sketch FEA Pro adds</h3>
+          <ul class="ticks">
+            <li>Every support and load: pins, rollers, symmetry, set displacements, forces and pressures, and probes.</li>
+            <li>Every material, and your own materials.</li>
+            <li>Heat, thermal stress, vibration, shaking, dynamics over time, buckling, and breakage.</li>
+            <li>Plane strain and axisymmetric models, and loads on the whole part such as gravity, rotation, and a temperature change.</li>
+            <li>Fine meshes for more detail.</li>
+            <li>Edit the examples.</li>
+            <li>Reports with the model settings and probe readings.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="section-intro reveal">Sketch FEA Pro is an auto-renewable subscription, monthly or yearly, with a free trial for eligible new subscribers. If your subscription ends, your sketches still open and run. See the <a href="pricing/">prices</a>, the <a href="terms/#pro">subscription terms</a> and the <a href="support/#cost">questions about Sketch FEA Pro</a>.</p>
+    </div>
+  </section>
+
+  <section class="section" id="device" aria-labelledby="device-title">
+    <div class="wrap">
+      <h2 id="device-title" class="section-title reveal">On your <span class="pencil mid">device</span></h2>
+      <p class="section-intro reveal">Drawing and calculation run on your iPhone or iPad. Your sketches stay on your device.</p>
+      <ul class="tiles wide reveal-group">
+        <li class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M1.5 8.8a15 15 0 0 1 21 0M5 12.4a10 10 0 0 1 14 0M8.5 15.9a5 5 0 0 1 7 0M3 3l18 18"/><circle cx="12" cy="19.4" r="1"/></svg>
+          <h3>Works offline</h3>
+          <p>Drawing and the calculation need no connection.</p>
+        </li>
+        <li class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0M3 3l18 18"/></svg>
+          <h3>No account</h3>
+          <p>Open the app and start. There is nothing to sign up for.</p>
+        </li>
+        <li class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M3 3l18 18"/></svg>
+          <h3>No ads</h3>
+          <p>The app shows no advertising.</p>
+        </li>
+        <li class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l1.2-4.4L16.6 4.2a2.1 2.1 0 0 1 3 3L8.2 18.6 4 20zM14.6 6.2l3 3"/></svg>
+          <h3>Apple Pencil</h3>
+          <p>Apple Pencil draws while your fingers pan and zoom. A keyboard, trackpad, or mouse works on iPad.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="education" aria-labelledby="education-title">
+    <div class="wrap">
+      <h2 id="education-title" class="section-title reveal">Educational use only</h2>
+      <div class="note reveal">
+        <p>Sketch FEA is for education and learning only. Its results are estimates from a simplified two-dimensional model. The calculation is verified against published exact solutions and benchmark cases, such as a cantilever beam, a plate with a hole, and Euler’s column, but it has not been validated against measurements or tested in real-world scenarios. It is not a substitute for professional engineering analysis, testing, or applicable codes and standards. Do not use it to design, rate, or approve any real part, or for safety-critical, medical, or compliance decisions. You use the results at your own risk; to the extent the law allows, Journey On is not responsible for any loss or decision based on them. See the <a href="terms/#educational-use">Terms of Use</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta band lit" id="get" aria-labelledby="get-title">
+    <div class="wrap reveal">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/sketch-fea-400-dark.webp">
+        <img class="app-icon" src="assets/sketch-fea-400.webp" width="400" height="400" loading="lazy" decoding="async" alt="">
+      </picture>
+      <h2 id="get-title">Sketch FEA for iPhone and iPad</h2>
+      <p>Learn how parts bend, heat, vibrate, and break by sketching. Requires iOS or iPadOS 16.4 or later.</p>
+      <div class="actions center">
+        <a class="btn primary" href="https://apps.apple.com/us/developer/journey-on/id1807155063">Coming soon to the App Store</a>
+      </div>
+      <p class="small muted">Questions? Email <a href="mailto:support@journeyon.co">support@journeyon.co</a> or read the <a href="support/">support page</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <p class="foot-brand"><strong>Sketch FEA</strong> by Journey On</p>
+      <nav aria-label="Footer">
+        <ul class="foot-links">
+          <li><a href="pricing/">Pricing</a></li>
+          <li><a href="support/">Support</a></li>
+          <li><a href="privacy/">Privacy Policy</a></li>
+          <li><a href="terms/">Terms of Use</a></li>
+          <li><a href="refunds/">Refund Policy</a></li>
+          <li><a href="https://www.instagram.com/journeyon_co/">Instagram</a></li>
+          <li><a href="mailto:support@journeyon.co">support@journeyon.co</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p>© 2026 Journey On. Sketch FEA is made by Omnis Dragon LLC, doing business as Journey On.</p>
+    <p>Apple, iPhone, iPad, iPadOS, Apple Pencil, Safari, and AirDrop are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store, iCloud, and iCloud Drive are service marks of Apple Inc., registered in the U.S. and other countries and regions.</p>
+    <p>Text is set in IBM Plex, used under the <a href="fonts/LICENSE.txt">SIL Open Font License 1.1</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
