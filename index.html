@@ -136,45 +136,48 @@
         <p>Draw lines, rectangles, circles, curves, freehand strokes, and dimensions in mm, with snapping, undo, and redo. Type a dimension to resize a side.</p>
         <p>Give each part a role: the solid part and its holes, the supports that hold it, the loads that push on it, and the temperatures and heat that reach it. Each solid has its own material.</p>
         <p>Model a plate of set thickness (plane stress), a slice of a long part (plane strain), or the section of a round part (axisymmetric).</p>
-      </div>
-      <div class="feature-aside reveal">
-        <div class="groups">
-          <div>
-            <h3>The part</h3>
-            <ul>
-              <li>Solid</li>
-              <li>Hole</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Supports</h3>
-            <ul>
-              <li>Fixed</li>
-              <li>Pin</li>
-              <li>Roller</li>
-              <li>Symmetry</li>
-              <li>Displacement</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Loads</h3>
-            <ul>
-              <li>Force</li>
-              <li>Pressure</li>
-              <li>Gravity, acceleration, and rotation</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Heat</h3>
-            <ul>
-              <li>Temperature</li>
-              <li>Heat flux</li>
-              <li>Convection</li>
-              <li>Heat source</li>
-            </ul>
+        <div class="feature-aside reveal">
+          <div class="groups">
+            <div>
+              <h3>The part</h3>
+              <ul>
+                <li>Solid</li>
+                <li>Hole</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Supports</h3>
+              <ul>
+                <li>Fixed</li>
+                <li>Pin</li>
+                <li>Roller</li>
+                <li>Symmetry</li>
+                <li>Displacement</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Loads</h3>
+              <ul>
+                <li>Force</li>
+                <li>Pressure</li>
+                <li>Gravity, acceleration, and rotation</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Heat</h3>
+              <ul>
+                <li>Temperature</li>
+                <li>Heat flux</li>
+                <li>Convection</li>
+                <li>Heat source</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+      <figure class="feature-shot reveal">
+        <img src="media/ipad-01-draw-640.webp" srcset="media/ipad-01-draw-640.webp 640w, media/ipad-01-draw-1280.webp 1280w" sizes="(min-width: 960px) 600px, calc(100vw - 32px)" width="640" height="480" loading="lazy" decoding="async" alt="Draw a part, see the stress. Stress and displacement show up as you draw. On iPad, a wall bracket with three holes, colored by von Mises stress, with the hole just drawn selected and its size in the Parts panel.">
+      </figure>
     </div>
   </section>
 
@@ -196,21 +199,24 @@
           <li>Read the largest values and where they are, the reactions at the supports, frequencies in Hz, the buckling load, and the peak force.</li>
           <li>Work in SI units (mm, N, MPa, °C) or US customary units (in, lbf, psi, °F).</li>
         </ul>
+        <div class="feature-aside reveal">
+          <h3 class="aside-title">Nine analyses</h3>
+          <ul class="aside-list">
+            <li><strong>Static stress</strong> Displacement, stress, strain, and the factor of safety.</li>
+            <li><strong>Heat</strong> Steady temperatures and the heat through each edge.</li>
+            <li><strong>Heat over time</strong> Temperatures as they change from a uniform start.</li>
+            <li><strong>Thermal stress</strong> The stress that a temperature change causes.</li>
+            <li><strong>Vibration modes</strong> Natural frequencies and mode shapes.</li>
+            <li><strong>Shaking</strong> The response to a force that swings at one frequency.</li>
+            <li><strong>Dynamics over time</strong> The motion after a sudden, ramped, or pulsed load.</li>
+            <li><strong>Buckling</strong> The load at which a slender part bows out.</li>
+            <li><strong>Breakage</strong> A rising load until the part yields, cracks, and breaks.</li>
+          </ul>
+        </div>
       </div>
-      <div class="feature-aside reveal">
-        <h3 class="aside-title">Nine analyses</h3>
-        <ul class="aside-list">
-          <li><strong>Static stress</strong> Displacement, stress, strain, and the factor of safety.</li>
-          <li><strong>Heat</strong> Steady temperatures and the heat through each edge.</li>
-          <li><strong>Heat over time</strong> Temperatures as they change from a uniform start.</li>
-          <li><strong>Thermal stress</strong> The stress that a temperature change causes.</li>
-          <li><strong>Vibration modes</strong> Natural frequencies and mode shapes.</li>
-          <li><strong>Shaking</strong> The response to a force that swings at one frequency.</li>
-          <li><strong>Dynamics over time</strong> The motion after a sudden, ramped, or pulsed load.</li>
-          <li><strong>Buckling</strong> The load at which a slender part bows out.</li>
-          <li><strong>Breakage</strong> A rising load until the part yields, cracks, and breaks.</li>
-        </ul>
-      </div>
+      <figure class="feature-shot reveal">
+        <img src="media/ipad-02-crack-640.webp" srcset="media/ipad-02-crack-640.webp 640w, media/ipad-02-crack-1280.webp 1280w" sizes="(min-width: 960px) 600px, calc(100vw - 32px)" width="640" height="480" loading="lazy" decoding="async" alt="Watch a crack run through it. Brittle and ductile parts, pulled until they break. Built-in example. On iPad, the aluminum dog bone tensile specimen torn in its gauge length, colored by plastic strain, beside Results with the peak force and the force against elongation.">
+      </figure>
     </div>
   </section>
 
@@ -220,50 +226,53 @@
         <h2 id="examples-title">Learn with <span class="pencil long">29 examples</span></h2>
         <p>Each example has notes on what to look for, the theory value where there is one, and what to try next. All 29 are free to run and explore, in every analysis.</p>
         <p>Pick from 18 materials, from structural steel and aluminum 6061-T6 to ABS, PLA, glass, and concrete, each with its properties and their sources.</p>
-      </div>
-      <div class="feature-aside reveal">
-        <div class="groups">
-          <div>
-            <h3>Checks against theory</h3>
-            <ul>
-              <li>Cantilever beam</li>
-              <li>Plate with a hole</li>
-              <li>Thick-walled cylinder</li>
-              <li>Rotating disk</li>
-              <li>Curved beam</li>
-              <li>Heat through a wall</li>
-              <li>Cooling fin</li>
-              <li>Sudden heating of a block</li>
-              <li>Clamped bar heated</li>
-              <li>Bimetal strip</li>
-              <li>Vibrating cantilever</li>
-              <li>Shaken cantilever</li>
-              <li>Sudden load on a bar</li>
-              <li>Column buckling</li>
-              <li>Bar past yield</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Applications</h3>
-            <ul>
-              <li>Dog bone tensile test</li>
-              <li>L-bracket</li>
-              <li>Crane hook</li>
-              <li>Wrench</li>
-              <li>Pressure vessel head</li>
-              <li>Heat sink</li>
-              <li>Brake disk</li>
-              <li>Hot pipe under pressure</li>
-              <li>Thermostat strip with a heater</li>
-              <li>Tuning fork</li>
-              <li>Bracket on a shaker</li>
-              <li>Dropped load on a beam</li>
-              <li>Strut with a hole</li>
-              <li>Notched glass bar</li>
-            </ul>
+        <div class="feature-aside reveal">
+          <div class="groups">
+            <div>
+              <h3>Checks against theory</h3>
+              <ul>
+                <li>Cantilever beam</li>
+                <li>Plate with a hole</li>
+                <li>Thick-walled cylinder</li>
+                <li>Rotating disk</li>
+                <li>Curved beam</li>
+                <li>Heat through a wall</li>
+                <li>Cooling fin</li>
+                <li>Sudden heating of a block</li>
+                <li>Clamped bar heated</li>
+                <li>Bimetal strip</li>
+                <li>Vibrating cantilever</li>
+                <li>Shaken cantilever</li>
+                <li>Sudden load on a bar</li>
+                <li>Column buckling</li>
+                <li>Bar past yield</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Applications</h3>
+              <ul>
+                <li>Dog bone tensile test</li>
+                <li>L-bracket</li>
+                <li>Crane hook</li>
+                <li>Wrench</li>
+                <li>Pressure vessel head</li>
+                <li>Heat sink</li>
+                <li>Brake disk</li>
+                <li>Hot pipe under pressure</li>
+                <li>Thermostat strip with a heater</li>
+                <li>Tuning fork</li>
+                <li>Bracket on a shaker</li>
+                <li>Dropped load on a beam</li>
+                <li>Strut with a hole</li>
+                <li>Notched glass bar</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+      <figure class="feature-shot reveal">
+        <img src="media/ipad-06-examples-640.webp" srcset="media/ipad-06-examples-640.webp 640w, media/ipad-06-examples-1280.webp 1280w" sizes="(min-width: 960px) 600px, calc(100vw - 32px)" width="640" height="480" loading="lazy" decoding="async" alt="Learn from 29 examples. Beams, brackets, hooks, and disks, with notes. On iPad, the list of examples open over a drawn bracket: the starting example and the checks against theory.">
+      </figure>
     </div>
   </section>
 
@@ -273,18 +282,21 @@
         <h2 id="theory-title">Compare with <span class="pencil mid">theory</span></h2>
         <p>Fifteen examples follow cases with a known answer from mechanics and heat transfer textbooks. When the run is done, the Results tab shows the theory value beside the app’s own value, and whether they agree within the stated tolerance.</p>
         <p>Change the part and see how far the answer moves: make a beam deeper, a hole larger, or a column taller.</p>
+        <div class="feature-aside reveal">
+          <h3 class="aside-title">Theory values in the notes</h3>
+          <ul class="aside-list">
+            <li><strong>Cantilever beam</strong> Tip deflection 0.2014 mm, from the elasticity solution.</li>
+            <li><strong>Plate with a hole</strong> Stress at the hole 3.15 times the stress far away.</li>
+            <li><strong>Clamped bar heated</strong> Stress −EαΔT = −117 MPa along the bar.</li>
+            <li><strong>Vibrating cantilever</strong> First bending frequency 808.4 Hz.</li>
+            <li><strong>Column buckling</strong> Buckling load 164.45 N: Euler’s load for a fixed–free column, lowered slightly by shear.</li>
+            <li><strong>Bar past yield</strong> Peak force 6,200 N, the tensile strength times the area.</li>
+          </ul>
+        </div>
       </div>
-      <div class="feature-aside reveal">
-        <h3 class="aside-title">Theory values in the notes</h3>
-        <ul class="aside-list">
-          <li><strong>Cantilever beam</strong> Tip deflection 0.2014 mm, from the elasticity solution.</li>
-          <li><strong>Plate with a hole</strong> Stress at the hole 3.15 times the stress far away.</li>
-          <li><strong>Clamped bar heated</strong> Stress −EαΔT = −117 MPa along the bar.</li>
-          <li><strong>Vibrating cantilever</strong> First bending frequency 808.4 Hz.</li>
-          <li><strong>Column buckling</strong> Buckling load 164.45 N: Euler’s load for a fixed–free column, lowered slightly by shear.</li>
-          <li><strong>Bar past yield</strong> Peak force 6,200 N, the tensile strength times the area.</li>
-        </ul>
-      </div>
+      <figure class="feature-shot reveal">
+        <img src="media/ipad-07-theory-640.webp" srcset="media/ipad-07-theory-640.webp 640w, media/ipad-07-theory-1280.webp 1280w" sizes="(min-width: 960px) 600px, calc(100vw - 32px)" width="640" height="480" loading="lazy" decoding="async" alt="Compare with theory. Examples check their results against textbook answers. Built-in example. On iPad, the cantilever beam colored by bending stress, beside Results with the tip deflection and the bending stress against the exact solution, within 2% and 1%.">
+      </figure>
     </div>
   </section>
 
